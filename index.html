@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinning Cat Piano</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #222;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .cat-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            height: 500px;
+        }
+        .cat {
+            width: 100%;
+            height: auto;
+            transition: transform 0.1s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Spinning Cat Piano</h1>
+    <p>Press U, I, A to play sounds and spin the cat!</p>
+    <div class="cat-container">
+        <img src="uia_cat.png" class="cat" id="cat">
+    </div>
+    <script>
+        const sounds = {
+            'u': new Audio('U.mp4'),
+            'i': new Audio('I.mp4'),
+            'a': new Audio('A.mp4')
+        };
+        
+        let rotation = 0;
+        
+        document.addEventListener('keydown', (event) => {
+            let key = event.key.toLowerCase();
+            if (sounds[key]) {
+                sounds[key].currentTime = 0;
+                sounds[key].play();
+                rotation += 30;
+                document.getElementById('cat').style.transform = `rotate(${rotation}deg)`;
+            }
+        });
+    </script>
+</body>
+</html>
